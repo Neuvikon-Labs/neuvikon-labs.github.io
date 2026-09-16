@@ -216,32 +216,45 @@ export const divisions: Division[] = [
       },
       {
         name: "Today's Word",
-        tagline: TODO,
-        featured: true,
+        /* ⚠️ Geçici: ad ve etiketten çıkarılmış, doğrulanmamış metin. */
+        tagline: "Günün kelimesi.",
+        description:
+          "Kelime bulmaca oyunu. Tasarımı sürüyor; kurallar ve ekran "
+          + "görüntüleri yayına hazır olduğunda eklenecek.",
+        image: "/apps/todays-word.png",
         status: "gelistirme",
         tags: ["Kelime oyunu"],
       },
       {
         name: "Timber Supply & Co",
-        tagline: TODO,
-        featured: true,
+        /* ⚠️ Geçici: ad ve etiketten çıkarılmış, doğrulanmamış metin. */
+        tagline: "Kes, taşı, sat. Zincirin tamamı sende.",
+        description:
+          "Kereste tedarik zinciri üzerine kurulu yönetim oyunu. Ayrıntılar "
+          + "yayına hazır olduğunda eklenecek.",
+        image: "/apps/timber-supply.png",
         status: "gelistirme",
         tags: ["Yönetim"],
       },
       {
         name: "Muavin-Sim",
-        tagline: TODO,
-        featured: true,
+        /* ⚠️ Geçici: ad ve etiketten çıkarılmış, doğrulanmamış metin. */
+        tagline: "Direksiyonda değilsin — kapıdasın.",
+        description:
+          "Otobüs muavinliği üzerine simülasyon oyunu. Ayrıntılar yayına "
+          + "hazır olduğunda eklenecek.",
+        image: "/apps/muavin-sim.png",
         status: "gelistirme",
         tags: ["Simülasyon"],
       },
       {
         name: "Duskfield",
-        tagline: TODO,
+        /* ⚠️ Geçici: ad ve etiketten çıkarılmış, doğrulanmamış metin. */
+        tagline: "Alacakaranlıkta geçen bir dünya.",
         description:
           "Arka uç tarafı Bun ile yazılıyor. Oyunun kendisine dair ayrıntılar " +
           "yayına hazır olduğunda eklenecek.",
-        featured: true,
+        image: "/apps/duskfield.png",
         status: "gelistirme",
         tags: ["Bun", "TypeScript"],
       },
@@ -288,8 +301,11 @@ export const divisions: Division[] = [
       },
       {
         name: "Neu-Chat",
-        tagline: TODO,
-        featured: true,
+        /* ⚠️ Geçici: ad ve etiketten çıkarılmış, doğrulanmamış metin. */
+        tagline: "Stüdyonun kendi sohbet katmanı.",
+        description:
+          "Sohbet uygulaması. Ayrıntılar yayına hazır olduğunda eklenecek.",
+        image: "/apps/neu-chat.png",
         status: "gelistirme",
         tags: ["Sohbet"],
       },

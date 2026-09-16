@@ -133,32 +133,45 @@ export const divisionsEn: Division[] = [
       },
       {
         name: "Today's Word",
-        tagline: TODO_EN,
-        featured: true,
+        /* ⚠️ Geçici: ad ve etiketten çıkarılmış, doğrulanmamış metin. */
+        tagline: "The word of the day.",
+        description:
+          "A word puzzle game. Still in design; the rules and screenshots "
+          + "will be added once it is ready to show.",
+        image: "/apps/todays-word.png",
         status: "gelistirme",
         tags: ["Word game"],
       },
       {
         name: "Timber Supply & Co",
-        tagline: TODO_EN,
-        featured: true,
+        /* ⚠️ Geçici: ad ve etiketten çıkarılmış, doğrulanmamış metin. */
+        tagline: "Cut it, haul it, sell it — the whole chain is yours.",
+        description:
+          "A management game built on a timber supply chain. Details will be "
+          + "added once it is ready to show.",
+        image: "/apps/timber-supply.png",
         status: "gelistirme",
         tags: ["Management"],
       },
       {
         name: "Muavin-Sim",
-        tagline: TODO_EN,
-        featured: true,
+        /* ⚠️ Geçici: ad ve etiketten çıkarılmış, doğrulanmamış metin. */
+        tagline: "You are not at the wheel — you are at the door.",
+        description:
+          "A simulation game about working as a bus conductor. Details will "
+          + "be added once it is ready to show.",
+        image: "/apps/muavin-sim.png",
         status: "gelistirme",
         tags: ["Simulation"],
       },
       {
         name: "Duskfield",
-        tagline: TODO_EN,
+        /* ⚠️ Geçici: ad ve etiketten çıkarılmış, doğrulanmamış metin. */
+        tagline: "A world set at dusk.",
         description:
           "The backend is being written in Bun. Details about the game itself " +
           "will be added when it is ready to show.",
-        featured: true,
+        image: "/apps/duskfield.png",
         status: "gelistirme",
         tags: ["Bun", "TypeScript"],
       },
@@ -205,8 +218,11 @@ export const divisionsEn: Division[] = [
       },
       {
         name: "Neu-Chat",
-        tagline: TODO_EN,
-        featured: true,
+        /* ⚠️ Geçici: ad ve etiketten çıkarılmış, doğrulanmamış metin. */
+        tagline: "The studio's own chat layer.",
+        description:
+          "A chat application. Details will be added once it is ready to show.",
+        image: "/apps/neu-chat.png",
         status: "gelistirme",
         tags: ["Chat"],
       },

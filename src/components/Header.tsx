@@ -15,8 +15,20 @@ import { Wordmark } from "./Logo";
  * İstemci bileşeni olmasının tek sebebi mobil menü durumu ve aktif
  * bağlantının işaretlenmesi.
  */
+/**
+ * Adresleri karşılaştırmadan önce sondaki eğik çizgiyi atar.
+ *
+ * `trailingSlash: true` ile `usePathname()` "/games/" döndürüyor ama
+ * `href()` ve `divisionHref()` "/games" üretiyor. Bu fark yüzünden hem
+ * aktif menü vurgusu hem dil değiştirme düğmesi çalışmıyordu — düğme her
+ * sayfada karşılığını bulamayıp ana sayfaya düşüyordu.
+ */
+function normalize(path: string): string {
+  return path.length > 1 ? path.replace(/\/$/, "") : path;
+}
+
 export function Header({ locale }: { locale: Locale }) {
-  const pathname = usePathname();
+  const pathname = normalize(usePathname());
   const [open, setOpen] = useState(false);
   const t = ui[locale];
   const { divisions } = getContent(locale);

@@ -1,0 +1,62 @@
+# Siteyi GitHub Pages'e yayınlar.
+#
+# `main` dalına her gönderimde çalışır: bağımlılıkları kurar, statik dışa
+# aktarımı üretir (`out/`) ve Pages'e yükler. Elle çalıştırmak için Actions
+# sekmesindeki "Run workflow" düğmesi de var.
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+# Pages'e yazmak için gereken en dar izin kümesi.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Aynı anda tek dağıtım. Arka arkaya iki gönderim olursa ikincisi birincinin
+# bitmesini bekler; yarıda kesilmiş bir yayın kalmasın diye iptal etmiyoruz.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Bağımlılıkları kur
+        run: npm ci
+
+      - name: Derle
+        env:
+          # Canlı adres. Alan adı değişirse burayı ve content.ts'teki
+          # varsayılanı birlikte güncelle.
+          NEXT_PUBLIC_SITE_URL: ${{ vars.SITE_URL || 'https://neuvikon-labs.github.io' }}
+          NEXT_PUBLIC_PLAUSIBLE_DOMAIN: ${{ vars.PLAUSIBLE_DOMAIN }}
+          NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION: ${{ vars.GOOGLE_SITE_VERIFICATION }}
+        run: npm run build
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: out
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

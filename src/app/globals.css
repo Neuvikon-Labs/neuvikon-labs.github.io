@@ -1,26 +1,125 @@
 @import "tailwindcss";
 
+/*
+  SpaceX düzeni uyarlaması.
+
+  Oradan alınan: saf siyah zemin, tam ekran bölümler, her bölümün kendi
+  görseli, sola dayalı ve büyük harf yazılmış kısa metin blokları, ince
+  çerçeveli düğmeler, neredeyse görünmez üst menü.
+
+  Bizden gelen: logonun yeşili. SpaceX'te hiç vurgu rengi yok; biz yeşili
+  çok az yerde (etiket satırı, aktif menü, bazı düğme kenarları) kullanıyoruz
+  — kimlik kaybolmasın ama siyah-beyaz disiplin de bozulmasın diye.
+*/
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #000000;
+  --panel: #0a0a0a;
+  --line: #2a2a2a;
+  --text: #ffffff;
+  --text-dim: #9b9b9b;
+  --accent: #50b868;
+  --accent-ink: #04160a;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg: var(--bg);
+  --color-panel: var(--panel);
+  --color-line: var(--line);
+  --color-text: var(--text);
+  --color-dim: var(--text-dim);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --font-display: var(--font-display);
+  --font-sans: var(--font-body);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  background: var(--bg);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Büyük harf, sıkışık, geniş harf aralıklı başlık sesi. SpaceX'in tamamı
+   bu tonda; ölçüyü tek yerden veriyoruz. */
+.display {
+  font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+  text-transform: uppercase;
+  font-weight: 500;
+  letter-spacing: 0.055em;
+  line-height: 1.02;
+  text-wrap: balance;
+}
+
+.label {
+  font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.26em;
+  font-weight: 500;
+  font-size: 0.72rem;
+}
+
+/* İnce çerçeveli düğme. Siyah bir fotoğrafın üstünde dolu bir dikdörtgen
+   fazla ağır duruyor; SpaceX de bu yüzden içi boş kullanıyor. */
+.ghost-btn {
+  display: inline-block;
+  border: 1px solid rgb(255 255 255 / 0.85);
+  padding: 0.7rem 2.1rem;
+  font-family: var(--font-display), sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.17em;
+  font-size: 0.78rem;
+  font-weight: 500;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+.ghost-btn:hover { background: var(--text); color: #000; }
+.ghost-btn.is-accent { border-color: var(--accent); color: var(--accent); }
+.ghost-btn.is-accent:hover { background: var(--accent); color: var(--accent-ink); }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+/* Tam ekran bölümler arasında durarak kayma — SpaceX'teki his bu.
+   "proximity" bilerek: "mandatory" klavyeyle gezenleri bölüm ortasında
+   kilitliyordu. */
+.snap { scroll-snap-type: y proximity; }
+.snap > section { scroll-snap-align: start; }
+
+/* Fotoğrafın üstündeki metnin okunması için alttan yukarı karartma. */
+.scrim {
+  background: linear-gradient(
+    to top,
+    rgb(0 0 0 / 0.93) 0%,
+    rgb(0 0 0 / 0.74) 30%,
+    rgb(0 0 0 / 0.32) 62%,
+    rgb(0 0 0 / 0.16) 100%
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .snap { scroll-snap-type: none; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Logodaki N'in yazılışı. Maskedeki kalem yolu kapalı başlıyor ve alttan
+   yukarı doğru açılıyor — bkz. components/Logo.tsx. Yavaşlayarak bitiyor:
+   imza atarken de son darbe hızlı başlayıp sönümlenir. */
+@keyframes pen-draw {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
+.pen-draw {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: pen-draw 1.8s cubic-bezier(0.62, 0.02, 0.3, 1) 0.15s forwards;
 }

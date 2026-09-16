@@ -40,7 +40,7 @@ jobs:
         env:
           # Canlı adres. Alan adı değişirse burayı ve content.ts'teki
           # varsayılanı birlikte güncelle.
-          NEXT_PUBLIC_SITE_URL: ${{ vars.SITE_URL || 'https://neuvikon-labs.github.io' }}
+          NEXT_PUBLIC_SITE_URL: ${{ vars.SITE_URL || 'https://neuvikon.github.io' }}
           NEXT_PUBLIC_PLAUSIBLE_DOMAIN: ${{ vars.PLAUSIBLE_DOMAIN }}
           NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION: ${{ vars.GOOGLE_SITE_VERIFICATION }}
         run: npm run build

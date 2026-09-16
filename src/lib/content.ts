@@ -75,7 +75,7 @@ export type Division = {
  * böylece önizleme dağıtımları canlı adresi kendine mal etmiyor.
  */
 export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://neuvikon-labs.github.io";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://neuvikon.github.io";
 
 export type Org = {
   name: string;

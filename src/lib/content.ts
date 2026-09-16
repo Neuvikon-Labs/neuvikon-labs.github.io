@@ -217,18 +217,21 @@ export const divisions: Division[] = [
       {
         name: "Today's Word",
         tagline: TODO,
+        featured: true,
         status: "gelistirme",
         tags: ["Kelime oyunu"],
       },
       {
         name: "Timber Supply & Co",
         tagline: TODO,
+        featured: true,
         status: "gelistirme",
         tags: ["Yönetim"],
       },
       {
         name: "Muavin-Sim",
         tagline: TODO,
+        featured: true,
         status: "gelistirme",
         tags: ["Simülasyon"],
       },
@@ -238,6 +241,7 @@ export const divisions: Division[] = [
         description:
           "Arka uç tarafı Bun ile yazılıyor. Oyunun kendisine dair ayrıntılar " +
           "yayına hazır olduğunda eklenecek.",
+        featured: true,
         status: "gelistirme",
         tags: ["Bun", "TypeScript"],
       },

@@ -134,18 +134,21 @@ export const divisionsEn: Division[] = [
       {
         name: "Today's Word",
         tagline: TODO_EN,
+        featured: true,
         status: "gelistirme",
         tags: ["Word game"],
       },
       {
         name: "Timber Supply & Co",
         tagline: TODO_EN,
+        featured: true,
         status: "gelistirme",
         tags: ["Management"],
       },
       {
         name: "Muavin-Sim",
         tagline: TODO_EN,
+        featured: true,
         status: "gelistirme",
         tags: ["Simulation"],
       },
@@ -155,6 +158,7 @@ export const divisionsEn: Division[] = [
         description:
           "The backend is being written in Bun. Details about the game itself " +
           "will be added when it is ready to show.",
+        featured: true,
         status: "gelistirme",
         tags: ["Bun", "TypeScript"],
       },

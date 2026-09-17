@@ -36,6 +36,7 @@ export function DivisionView({ locale, d }: { locale: Locale; d: Division }) {
             <h1 className="mt-6">
               <DivisionLogo
                 slug={d.slug}
+                priority
                 className="h-auto w-[min(88vw,32rem)]"
               />
             </h1>

@@ -230,12 +230,12 @@ export const divisions: Division[] = [
       },
       {
         name: "Timber Supply & Co",
-        /* ⚠️ Geçici: ad ve etiketten çıkarılmış, doğrulanmamış metin. */
+        /* ⚠️ Metin geçici; görsel oyunun kendi sanatı. */
         tagline: "Kes, taşı, sat. Zincirin tamamı sende.",
         description:
           "Kereste tedarik zinciri üzerine kurulu yönetim oyunu. Ayrıntılar "
           + "yayına hazır olduğunda eklenecek.",
-        image: "/apps/timber-supply.png",
+        image: "/apps/timber-supply.jpg",
         status: "gelistirme",
         tags: ["Yönetim"],
       },

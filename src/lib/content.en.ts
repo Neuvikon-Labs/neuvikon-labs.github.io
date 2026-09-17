@@ -143,12 +143,12 @@ export const divisionsEn: Division[] = [
       },
       {
         name: "Timber Supply & Co",
-        /* ⚠️ Geçici: ad ve etiketten çıkarılmış, doğrulanmamış metin. */
+        /* ⚠️ Metin geçici; görsel oyunun kendi sanatı. */
         tagline: "Cut it, haul it, sell it — the whole chain is yours.",
         description:
           "A management game built on a timber supply chain. Details will be "
           + "added once it is ready to show.",
-        image: "/apps/timber-supply.png",
+        image: "/apps/timber-supply.jpg",
         status: "gelistirme",
         tags: ["Management"],
       },

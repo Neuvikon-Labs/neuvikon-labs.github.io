@@ -123,3 +123,31 @@ body {
   stroke-dashoffset: 1;
   animation: pen-draw 1.8s cubic-bezier(0.62, 0.02, 0.3, 1) 0.15s forwards;
 }
+
+/* ---------------------------------------------------------------- mobil
+
+   Büyük harf + geniş harf aralığı dar ekranda taşıyor: ".label" 0.26em ile
+   "NETCODE FOR GAMEOBJECTS" etiketini ~334 piksel yapıyordu, 360 piksellik
+   bir telefonda kenar boşluğu düşünce 312 piksel yer kalıyor. Harf
+   aralığını ve punto'yu küçültmek, etiketi kesmekten ya da iki satıra
+   bölmekten daha iyi duruyor.
+
+   Düğmeler de aynı sebeple daraltıldı: iki ghost-btn yan yana 360 pikselde
+   alt alta düşüyor ve arada boşluk kalıyordu. */
+@media (max-width: 640px) {
+  .label {
+    font-size: 0.66rem;
+    letter-spacing: 0.14em;
+  }
+  .ghost-btn {
+    padding: 0.62rem 1.35rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+  }
+}
+
+/* Uzun bir etiket yine de sığmazsa kelime ortasından bölünsün — yatay
+   kaydırma çubuğu çıkarmaktan iyidir. */
+.label {
+  overflow-wrap: anywhere;
+}

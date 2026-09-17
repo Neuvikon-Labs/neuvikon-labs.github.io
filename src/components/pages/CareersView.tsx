@@ -17,7 +17,7 @@ export function CareersView({ locale }: { locale: Locale }) {
   const hasOpenings = careers.openings.length > 0;
 
   return (
-    <section className="relative flex min-h-[85svh] flex-col justify-center">
+    <section className="relative flex min-h-[85svh] flex-col justify-center py-28 sm:py-24">
       <div className="mx-auto w-full max-w-6xl px-6">
         <p className="label text-accent">{t.careers}</p>
         <h1 className="display mt-4 max-w-[16ch] text-[clamp(2.4rem,7vw,4.6rem)]">

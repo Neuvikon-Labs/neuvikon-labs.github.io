@@ -4,17 +4,16 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { getContent } from "@/lib/content";
-import { divisionHref, href, type Locale, otherLocale, routes, ui } from "@/lib/i18n";
+import {
+  divisionHref,
+  href,
+  type Locale,
+  otherLocale,
+  routes,
+  ui,
+} from "@/lib/i18n";
 import { Wordmark } from "./Logo";
 
-/**
- * Üst menü — SpaceX'teki gibi zemini olmayan, fotoğrafın üstünde duran bir
- * şerit. Arka plan rengi YOK; bulanıklık ve çubuk yok. Fotoğrafın üstünde
- * okunmasını sağlayan şey bölümün kendi karartması.
- *
- * İstemci bileşeni olmasının tek sebebi mobil menü durumu ve aktif
- * bağlantının işaretlenmesi.
- */
 /**
  * Adresleri karşılaştırmadan önce sondaki eğik çizgiyi atar.
  *
@@ -27,6 +26,14 @@ function normalize(path: string): string {
   return path.length > 1 ? path.replace(/\/$/, "") : path;
 }
 
+/**
+ * Üst menü — SpaceX'teki gibi zemini olmayan, fotoğrafın üstünde duran bir
+ * şerit. Arka plan rengi YOK; bulanıklık ve çubuk yok. Fotoğrafın üstünde
+ * okunmasını sağlayan şey bölümün kendi karartması.
+ *
+ * İstemci bileşeni olmasının tek sebebi mobil menü durumu ve aktif
+ * bağlantının işaretlenmesi.
+ */
 export function Header({ locale }: { locale: Locale }) {
   const pathname = normalize(usePathname());
   const [open, setOpen] = useState(false);
@@ -85,7 +92,9 @@ export function Header({ locale }: { locale: Locale }) {
               href={l.href}
               aria-current={pathname === l.href ? "page" : undefined}
               className={`label transition-colors ${
-                pathname === l.href ? "text-accent" : "text-text/80 hover:text-text"
+                pathname === l.href
+                  ? "text-accent"
+                  : "text-text/80 hover:text-text"
               }`}
             >
               {l.label}
@@ -114,7 +123,10 @@ export function Header({ locale }: { locale: Locale }) {
       </nav>
 
       {open && (
-        <div id="mobil-menu" className="border-y border-line bg-bg px-6 py-4 sm:hidden">
+        <div
+          id="mobil-menu"
+          className="border-y border-line bg-bg px-6 py-4 sm:hidden"
+        >
           {divisions.map((d) => (
             <Link
               key={d.slug}

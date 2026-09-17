@@ -15,19 +15,23 @@ export function DivisionView({ locale, d }: { locale: Locale; d: Division }) {
   /* Metni yazılmış projeler tam ekran alır; henüz yazılmamışlar aşağıdaki
      kısa listeye düşer. Bir projeye metin eklendiği anda kendiliğinden
      yukarı, tam ekrana taşınıyor. `featured` bu kararı elle ezebiliyor. */
-  const isBig = (p: Division["projects"][number]) => p.featured ?? !isPending(p.tagline);
+  const isBig = (p: Division["projects"][number]) =>
+    p.featured ?? !isPending(p.tagline);
   const featured = d.projects.filter(isBig);
   const quiet = d.projects.filter((p) => !isBig(p));
 
   return (
     <>
       {/* ---------------------------------------------------- açılış ekranı */}
-      <section className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden">
+      <section className="relative flex min-h-[100svh] flex-col justify-center py-28 sm:py-24 overflow-hidden">
         <div className="relative mx-auto w-full max-w-6xl px-6">
           <p className="label text-accent" lang="en">
             {d.short}
           </p>
-          <h1 className="display mt-4 max-w-[14ch] text-[clamp(2.6rem,8vw,5.5rem)]" lang="en">
+          <h1
+            className="display mt-4 max-w-[14ch] text-[clamp(2.6rem,8vw,5.5rem)]"
+            lang="en"
+          >
             {d.name}
           </h1>
           <p className="mt-6 max-w-[52ch] text-[15px] leading-relaxed text-dim">
@@ -67,7 +71,9 @@ export function DivisionView({ locale, d }: { locale: Locale; d: Division }) {
               {p.description}
             </p>
           ) : (
-            isPending(p.tagline) && <span className="label text-dim/60">{p.tagline}</span>
+            isPending(p.tagline) && (
+              <span className="label text-dim/60">{p.tagline}</span>
+            )
           )}
           <ul className="flex flex-wrap gap-x-5 gap-y-2">
             {p.tags.map((tag) => (
@@ -110,10 +116,15 @@ export function DivisionView({ locale, d }: { locale: Locale; d: Division }) {
               {quiet.map((p) => (
                 <li key={p.name} className="bg-bg py-6 pr-6 sm:px-1">
                   <div className="flex flex-wrap items-baseline gap-x-4">
-                    <h2 className="display text-[clamp(1.2rem,2.4vw,1.6rem)]" lang="en">
+                    <h2
+                      className="display text-[clamp(1.2rem,2.4vw,1.6rem)]"
+                      lang="en"
+                    >
                       {p.name}
                     </h2>
-                    <span className="label text-accent">{statusLabel[p.status]}</span>
+                    <span className="label text-accent">
+                      {statusLabel[p.status]}
+                    </span>
                   </div>
                   {p.description && (
                     <p className="mt-3 max-w-[42ch] text-[14px] leading-relaxed text-dim">
@@ -122,7 +133,11 @@ export function DivisionView({ locale, d }: { locale: Locale; d: Division }) {
                   )}
                   <ul className="mt-4 flex flex-wrap gap-x-5 gap-y-2">
                     {p.tags.map((tag) => (
-                      <li key={tag} className="label text-dim/70" lang={termLang(tag)}>
+                      <li
+                        key={tag}
+                        className="label text-dim/70"
+                        lang={termLang(tag)}
+                      >
                         {tag}
                       </li>
                     ))}
@@ -160,7 +175,10 @@ export function DivisionView({ locale, d }: { locale: Locale; d: Division }) {
             <p className="mt-6 max-w-[46ch] text-[15px] leading-relaxed text-dim">
               {t.noProjects}
             </p>
-            <Link href={href(locale, "contact")} className="ghost-btn is-accent mt-9">
+            <Link
+              href={href(locale, "contact")}
+              className="ghost-btn is-accent mt-9"
+            >
               {t.getInTouch}
             </Link>
           </div>
@@ -168,12 +186,16 @@ export function DivisionView({ locale, d }: { locale: Locale; d: Division }) {
       )}
 
       {/* ----------------------------------------------------- diğer bölümler */}
-      <section className="relative flex min-h-[60svh] flex-col justify-center border-t border-line">
+      <section className="relative flex min-h-[60svh] flex-col justify-center py-28 sm:py-24 border-t border-line">
         <div className="mx-auto w-full max-w-6xl px-6">
           <p className="label text-accent">{t.otherDivisions}</p>
           <div className="mt-8 grid gap-10 sm:grid-cols-2">
             {others.map((o) => (
-              <Link key={o.slug} href={divisionHref(locale, o.slug)} className="group block">
+              <Link
+                key={o.slug}
+                href={divisionHref(locale, o.slug)}
+                className="group block"
+              >
                 <h2
                   className="display text-[clamp(1.6rem,3.4vw,2.4rem)] transition-colors group-hover:text-accent"
                   lang="en"

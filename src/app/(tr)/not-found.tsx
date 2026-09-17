@@ -3,7 +3,7 @@ import { Glyph } from "@/components/Logo";
 
 export default function NotFound() {
   return (
-    <section className="flex min-h-[80svh] flex-col justify-center">
+    <section className="flex min-h-[80svh] flex-col justify-center py-28 sm:py-24">
       <div className="mx-auto w-full max-w-6xl px-6">
         <Glyph height={56} />
         <h1 className="display mt-8 text-[clamp(2.2rem,6vw,4rem)]">Sayfa yok</h1>

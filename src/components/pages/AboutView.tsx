@@ -17,11 +17,13 @@ export function AboutView({ locale }: { locale: Locale }) {
 
   return (
     <>
-      <section className="relative flex min-h-[80svh] flex-col justify-center">
+      <section className="relative flex min-h-[80svh] flex-col justify-center py-28 sm:py-24">
         <div className="mx-auto w-full max-w-6xl px-6">
           <p className="label text-accent">{t.about}</p>
           <h1 className="display mt-4 max-w-[16ch] text-[clamp(2.4rem,7vw,4.6rem)]">
-            {locale === "en" ? "Few things, finished" : "Az sayıda iş, sonuna kadar"}
+            {locale === "en"
+              ? "Few things, finished"
+              : "Az sayıda iş, sonuna kadar"}
           </h1>
           <p className="mt-6 max-w-[54ch] text-[15px] leading-relaxed text-dim">
             {about.lead}
@@ -56,7 +58,9 @@ export function AboutView({ locale }: { locale: Locale }) {
           <div className="mt-12 grid gap-px border-y border-line bg-line sm:grid-cols-2">
             {about.principles.map((p) => (
               <div key={p.title} className="bg-bg py-8 pr-8 sm:px-1">
-                <h2 className="display text-[clamp(1.2rem,2.4vw,1.6rem)]">{p.title}</h2>
+                <h2 className="display text-[clamp(1.2rem,2.4vw,1.6rem)]">
+                  {p.title}
+                </h2>
                 <p className="mt-4 max-w-[46ch] text-[14px] leading-relaxed text-dim">
                   {p.body}
                 </p>
@@ -74,7 +78,11 @@ export function AboutView({ locale }: { locale: Locale }) {
           </p>
           <div className="mt-10 grid gap-10 sm:grid-cols-3">
             {divisions.map((d) => (
-              <Link key={d.slug} href={divisionHref(locale, d.slug)} className="group block">
+              <Link
+                key={d.slug}
+                href={divisionHref(locale, d.slug)}
+                className="group block"
+              >
                 <h2
                   className="display text-[clamp(1.4rem,3vw,2rem)] transition-colors group-hover:text-accent"
                   lang="en"
@@ -89,13 +97,20 @@ export function AboutView({ locale }: { locale: Locale }) {
           </div>
 
           <div className="mt-16">
-            <Link href={href(locale, "contact")} className="ghost-btn is-accent">
+            <Link
+              href={href(locale, "contact")}
+              className="ghost-btn is-accent"
+            >
               {t.getInTouch}
             </Link>
           </div>
           <p className="mt-6 text-[14px] text-dim">
             {locale === "en" ? "Or write directly to " : "Ya da doğrudan "}
-            <a href={`mailto:${org.email}`} className="text-accent hover:underline" lang="en">
+            <a
+              href={`mailto:${org.email}`}
+              className="text-accent hover:underline"
+              lang="en"
+            >
               {org.email}
             </a>
           </p>

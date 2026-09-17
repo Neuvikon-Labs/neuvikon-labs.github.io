@@ -19,14 +19,20 @@ export function HomeView({ locale }: { locale: Locale }) {
   return (
     <>
       {/* -------------------------------------------------- açılış ekranı */}
-      <section className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden">
+      <section className="relative flex min-h-[100svh] flex-col justify-center py-28 sm:py-24 overflow-hidden">
         {/* Açılışta fotoğraf yok: logo tek başına duruyor. Elde gerçek bir
             stüdyo fotoğrafı olmadan sahte bir görsel koymaktansa siyahın
             üstünde imza daha dürüst — ve SpaceX'in sessizliğine de uyuyor. */}
         <div className="relative mx-auto w-full max-w-6xl px-6">
-          <Wordmark height={132} priority className="!h-[clamp(72px,13vw,150px)]" />
+          <Wordmark
+            height={132}
+            priority
+            className="!h-[clamp(72px,13vw,150px)]"
+          />
           <p className="display mt-10 max-w-[18ch] text-[clamp(1.9rem,5vw,3.4rem)] text-text">
-            {locale === "en" ? "Software, games and robotics" : "Yazılım, oyun ve robotik"}
+            {locale === "en"
+              ? "Software, games and robotics"
+              : "Yazılım, oyun ve robotik"}
           </p>
           <p className="mt-6 max-w-[52ch] text-[15px] leading-relaxed text-dim">
             {org.description}
@@ -41,9 +47,12 @@ export function HomeView({ locale }: { locale: Locale }) {
           </div>
         </div>
 
+        {/* Telefonda gizli: ekranın altına sabitlenmiş bu ipucu, py-28 ile
+            aşağı inen düğmelerin üstüne biniyordu. Zaten dokunmatik ekranda
+            kaydırmayı kimse öğrenmeye ihtiyaç duymuyor. */}
         <span
           aria-hidden="true"
-          className="label absolute inset-x-0 bottom-8 text-center text-dim"
+          className="label absolute inset-x-0 bottom-8 hidden text-center text-dim sm:block"
         >
           {t.scrollDown}
         </span>
@@ -63,13 +72,15 @@ export function HomeView({ locale }: { locale: Locale }) {
             <Link href={divisionHref(locale, d.slug)} className="ghost-btn">
               {t.explore}
             </Link>
-            <span className="label text-dim">{t.projectCount(d.projects.length)}</span>
+            <span className="label text-dim">
+              {t.projectCount(d.projects.length)}
+            </span>
           </Scene>
         </div>
       ))}
 
       {/* ------------------------------------------------------- iletişim */}
-      <section className="relative flex min-h-[70svh] flex-col justify-center border-t border-line">
+      <section className="relative flex min-h-[70svh] flex-col justify-center py-28 sm:py-24 border-t border-line">
         <div className="mx-auto w-full max-w-6xl px-6">
           <p className="label text-accent">{t.contact}</p>
           <h2 className="display mt-4 max-w-[14ch] text-[clamp(2.2rem,6vw,4.2rem)]">
@@ -78,7 +89,11 @@ export function HomeView({ locale }: { locale: Locale }) {
           <p className="mt-5 max-w-[44ch] text-[15px] leading-relaxed text-dim">
             {t.contactLead}
           </p>
-          <a href={`mailto:${org.email}`} className="ghost-btn is-accent mt-9" lang="en">
+          <a
+            href={`mailto:${org.email}`}
+            className="ghost-btn is-accent mt-9"
+            lang="en"
+          >
             {org.email}
           </a>
         </div>

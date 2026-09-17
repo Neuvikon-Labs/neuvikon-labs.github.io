@@ -18,7 +18,7 @@ export function ContactView({ locale }: { locale: Locale }) {
   const { org } = getContent(locale);
 
   return (
-    <section className="relative flex min-h-[90svh] flex-col justify-center">
+    <section className="relative flex min-h-[90svh] flex-col justify-center py-28 sm:py-24">
       <div className="mx-auto w-full max-w-6xl px-6">
         <p className="label text-accent">{t.contact}</p>
         <h1 className="display mt-4 max-w-[14ch] text-[clamp(2.4rem,7vw,4.6rem)]">
@@ -32,7 +32,9 @@ export function ContactView({ locale }: { locale: Locale }) {
 
         <div className="mt-12 grid gap-px border-y border-line bg-line sm:grid-cols-2">
           <div className="bg-bg py-8 pr-8 sm:px-1">
-            <p className="label text-dim">{locale === "en" ? "Email" : "E-posta"}</p>
+            <p className="label text-dim">
+              {locale === "en" ? "Email" : "E-posta"}
+            </p>
             <a
               href={`mailto:${org.email}`}
               className="mt-3 block text-[clamp(1.1rem,2.6vw,1.6rem)] text-text transition-colors hover:text-accent"
@@ -43,7 +45,9 @@ export function ContactView({ locale }: { locale: Locale }) {
           </div>
 
           <div className="bg-bg py-8 pr-8 sm:px-1">
-            <p className="label text-dim">{locale === "en" ? "Links" : "Bağlantılar"}</p>
+            <p className="label text-dim">
+              {locale === "en" ? "Links" : "Bağlantılar"}
+            </p>
             <ul className="mt-3 space-y-2">
               {links.map((l) => (
                 <li key={l.href}>

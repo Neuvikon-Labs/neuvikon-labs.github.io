@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useId } from "react";
 import wordmark from "../../public/neuvikon-logo.png";
+import wordmarkLight from "../../public/neuvikon-logo-light.png";
 import glyph from "../../public/neuvikon-n.png";
 
 /**
@@ -65,14 +66,25 @@ export function Wordmark({
 
   if (!animate) {
     return (
-      <Image
-        src={wordmark}
-        alt="Neuvikon"
-        height={height}
-        style={{ height, width: "auto" }}
-        priority={priority}
-        className={className}
-      />
+      <>
+        <Image
+          src={wordmark}
+          alt="Neuvikon"
+          height={height}
+          style={{ height, width: "auto" }}
+          priority={priority}
+          className={`logo-ink-dark ${className}`}
+        />
+        <Image
+          src={wordmarkLight}
+          alt=""
+          aria-hidden="true"
+          height={height}
+          style={{ height, width: "auto" }}
+          priority={priority}
+          className={`logo-ink-light ${className}`}
+        />
+      </>
     );
   }
 
@@ -88,8 +100,19 @@ export function Wordmark({
       <defs>
         <PenMask id={maskId} rest />
       </defs>
+      {/* İki sürüm de basılıyor, hangisinin görüneceğine CSS karar veriyor.
+          Temayı JavaScript'le seçmek, tema uygulanmadan önceki ilk karede
+          yanlış logoyu gösteriyordu. */}
       <image
+        className="logo-ink-dark"
         href={wordmark.src}
+        width={ART.w}
+        height={ART.h}
+        mask={`url(#${maskId})`}
+      />
+      <image
+        className="logo-ink-light"
+        href={wordmarkLight.src}
         width={ART.w}
         height={ART.h}
         mask={`url(#${maskId})`}

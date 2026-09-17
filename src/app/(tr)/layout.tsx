@@ -3,6 +3,7 @@ import { Barlow, Barlow_Condensed } from "next/font/google";
 import "../globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { THEME_SCRIPT } from "@/components/ThemeToggle";
 import { getContent, links, SITE_URL } from "@/lib/content";
 import { routes, ui } from "@/lib/i18n";
 
@@ -87,6 +88,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${display.variable} ${body.variable} h-full antialiased`}
     >
       <head>
+        {/* Kaydedilmiş tema tercihi, sayfa boyanmadan önce uygulanıyor.
+            Sonradan uygulamak ilk karede koyu temayı gösterip aydınlığa
+            atlamaya yol açıyordu. */}
+        <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
         <script
           type="application/ld+json"
           // İçerik bizim ürettiğimiz sabit bir nesne; dışarıdan girdi almıyor.

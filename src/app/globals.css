@@ -19,6 +19,49 @@
   --text-dim: #9b9b9b;
   --accent: #50b868;
   --accent-ink: #04160a;
+
+  /* Fotoğrafın üstündeki metni okunur kılan katman. Renk değerleri temaya
+     bağlı: koyuda siyaha, aydınlıkta beyaza doğru açılıyor. */
+  --scrim-0: rgb(0 0 0 / 0.93);
+  --scrim-1: rgb(0 0 0 / 0.74);
+  --scrim-2: rgb(0 0 0 / 0.32);
+  --scrim-3: rgb(0 0 0 / 0.16);
+}
+
+/*
+  Aydınlık mod.
+
+  Varsayılan değil: sitenin kimliği siyah ve ziyaretçi bir tercih
+  belirtmediyse öyle kalıyor. Aydınlık yalnızca üst menüdeki düğmeyle,
+  yani açık bir istekle geliyor ve tercih tarayıcıda saklanıyor.
+  (Sistem ayarını izlemesini istersen `prefers-color-scheme` sorgusunu
+  aşağıya eklemek yeterli.)
+
+  Vurgu yeşili burada koyulaştırıldı: logonun #50b868 yeşili beyaz zeminde
+  2.2:1 kontrast veriyor ve küçük büyük harf etiketler okunmuyordu. Logonun
+  kendisi grafik olduğu için orijinal yeşilini koruyor.
+*/
+:root[data-theme="light"] {
+  --bg: #ffffff;
+  --panel: #f6f7f6;
+  --line: #e2e4e2;
+  --text: #111312;
+  --text-dim: #5c6360;
+  --accent: #2e7d46;
+  --accent-ink: #ffffff;
+
+  --scrim-0: rgb(255 255 255 / 0.94);
+  --scrim-1: rgb(255 255 255 / 0.78);
+  --scrim-2: rgb(255 255 255 / 0.38);
+  --scrim-3: rgb(255 255 255 / 0.18);
+}
+
+/* Logonun iki sürümü var: koyuda beyaz, aydınlıkta siyah yazılı. İkisi de
+   basılıp CSS ile seçiliyor — JavaScript'e bağlamak, tema uygulanmadan
+   önceki ilk karede yanlış logoyu gösteriyordu. */
+:root[data-theme="light"] .logo-ink-dark,
+:root:not([data-theme="light"]) .logo-ink-light {
+  display: none;
 }
 
 @theme inline {
@@ -67,7 +110,7 @@ body {
    fazla ağır duruyor; SpaceX de bu yüzden içi boş kullanıyor. */
 .ghost-btn {
   display: inline-block;
-  border: 1px solid rgb(255 255 255 / 0.85);
+  border: 1px solid color-mix(in srgb, var(--text) 85%, transparent);
   padding: 0.7rem 2.1rem;
   font-family: var(--font-display), sans-serif;
   text-transform: uppercase;
@@ -76,7 +119,7 @@ body {
   font-weight: 500;
   transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
-.ghost-btn:hover { background: var(--text); color: #000; }
+.ghost-btn:hover { background: var(--text); color: var(--bg); }
 .ghost-btn.is-accent { border-color: var(--accent); color: var(--accent); }
 .ghost-btn.is-accent:hover { background: var(--accent); color: var(--accent-ink); }
 
@@ -95,10 +138,10 @@ body {
 .scrim {
   background: linear-gradient(
     to top,
-    rgb(0 0 0 / 0.93) 0%,
-    rgb(0 0 0 / 0.74) 30%,
-    rgb(0 0 0 / 0.32) 62%,
-    rgb(0 0 0 / 0.16) 100%
+    var(--scrim-0) 0%,
+    var(--scrim-1) 30%,
+    var(--scrim-2) 62%,
+    var(--scrim-3) 100%
   );
 }
 

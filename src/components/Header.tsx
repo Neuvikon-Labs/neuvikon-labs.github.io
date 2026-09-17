@@ -13,6 +13,7 @@ import {
   ui,
 } from "@/lib/i18n";
 import { Wordmark } from "./Logo";
+import { ThemeToggle } from "./ThemeToggle";
 
 /**
  * Adresleri karşılaştırmadan önce sondaki eğik çizgiyi atar.
@@ -109,17 +110,21 @@ export function Header({ locale }: { locale: Locale }) {
           >
             {t.switchLanguage}
           </Link>
+          <ThemeToggle locale={locale} />
         </div>
 
-        <button
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          aria-expanded={open}
-          aria-controls="mobil-menu"
-          className="label -mr-1 py-2 text-text sm:hidden"
-        >
-          {open ? t.close : t.menu}
-        </button>
+        <div className="flex items-center gap-4 sm:hidden">
+          <ThemeToggle locale={locale} />
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            aria-expanded={open}
+            aria-controls="mobil-menu"
+            className="label -mr-1 py-2 text-text"
+          >
+            {open ? t.close : t.menu}
+          </button>
+        </div>
       </nav>
 
       {open && (

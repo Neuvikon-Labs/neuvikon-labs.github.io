@@ -49,6 +49,29 @@ export function AboutView({ locale }: { locale: Locale }) {
         </div>
       </section>
 
+      {/* ------------------------------------------------------------ ekip */}
+      <section className="border-t border-line py-24 sm:py-32">
+        <div className="mx-auto w-full max-w-6xl px-6">
+          <p className="label text-accent">{locale === "en" ? "Team" : "Ekip"}</p>
+          {/* Unvan yok. Dört kişilik bir stüdyoda herkes birden fazla iş
+              yapıyor; "CTO" gibi başlıklar sahte bir hiyerarşi kurardı. */}
+          <ul className="mt-10 grid gap-px border-y border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
+            {about.team.map((person) => (
+              <li
+                key={person}
+                /* `lang="tr"` İngilizce sayfada da gerekli: adlar büyük
+                   harfe çevrilirken Türkçe kuralı uygulanmazsa "Bilgin"
+                   → "BILGIN" oluyor, "BİLGİN" değil. */
+                lang="tr"
+                className="display bg-bg py-6 pr-6 text-[clamp(1.05rem,2.2vw,1.35rem)] sm:px-1"
+              >
+                {person}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
       {/* --------------------------------------------- nasıl çalışıyoruz */}
       <section className="border-t border-line py-24 sm:py-32">
         <div className="mx-auto w-full max-w-6xl px-6">

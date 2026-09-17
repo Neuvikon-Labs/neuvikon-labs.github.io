@@ -1,5 +1,4 @@
 import type { About, Careers, Division, Org, ProjectStatus } from "./content";
-import { TODO_EN } from "./i18n";
 
 /**
  * İngilizce içerik.
@@ -310,10 +309,16 @@ export const aboutEn: About = {
     },
   ],
   facts: [
-    { label: "Founded", value: TODO_EN },
-    { label: "Location", value: TODO_EN },
-    { label: "Team", value: TODO_EN },
+    { label: "Founded", value: "2026" },
+    { label: "Location", value: "Türkiye" },
+    { label: "Team", value: "4 people" },
     { label: "Divisions", value: "3" },
+  ],
+  team: [
+    "Vural Bilgin",
+    "Oğulcan Yusuf Bozkurt",
+    "Arda Özan",
+    "İrem Bozkurt",
   ],
 };
 

@@ -89,6 +89,9 @@ export type About = {
   lead: string;
   principles: { title: string; body: string }[];
   facts: { label: string; value: string }[];
+  /** Ekipteki kişiler. Rol yazmıyoruz — küçük bir stüdyoda herkes birden
+   *  fazla iş yapıyor ve uydurma unvanlar sahte bir hiyerarşi kuruyor. */
+  team: string[];
 };
 
 export type Careers = {
@@ -500,10 +503,16 @@ export const about: About = {
   ],
   /** Sayfanın üst kısmındaki kısa künye. TODO olanlar sayfada da TODO görünür. */
   facts: [
-    { label: "Kuruluş", value: TODO },
-    { label: "Konum", value: TODO },
-    { label: "Ekip", value: TODO },
+    { label: "Kuruluş", value: "2026" },
+    { label: "Konum", value: "Türkiye" },
+    { label: "Ekip", value: "4 kişi" },
     { label: "Bölüm", value: "3" },
+  ],
+  team: [
+    "Vural Bilgin",
+    "Oğulcan Yusuf Bozkurt",
+    "Arda Özan",
+    "İrem Bozkurt",
   ],
 };
 

@@ -4,33 +4,70 @@ import { useId } from "react";
 import { divisionLogos } from "@/lib/division-logos";
 
 /**
- * Bölüm logosu — ana logodaki yazılış animasyonunun aynısı.
+ * Bölüm logosu — ana logodaki yazılış animasyonu, artı logoya özel bir
+ * parça hareketi.
  *
  * Mantık `Logo.tsx` ile aynı: görsel yeniden çizilmiyor, ekranda görünen
- * piksel her zaman orijinal PNG. Animasyon maskeyle yapılıyor; maskede iki
- * parça var:
+ * piksel her zaman orijinal PNG. Katmanlar aynı PNG'nin maskelenmiş
+ * kopyaları — böylece her katman için ayrı koyu/aydınlık dosya tutmak
+ * gerekmiyor.
  *
- *   1. N dışındaki her şey — sabit, en baştan görünür (`mask` görseli).
- *   2. N — kalem yolu boyunca açılan kalın bir çizgi.
+ * Üç katman var:
+ *   1. Ayrı parça (Games'te kılıç, Robotics'te çark) — kendi animasyonuyla.
+ *   2. Taban: N ve o parça dışındaki her şey; en baştan görünür.
+ *   3. N: kalem yolu boyunca alttan yukarı açılır.
  *
- * Tek fark maskenin ilk parçasının dikdörtgen değil görsel olması: bölüm
- * logolarında N, altındaki yazıyla aynı sütunları paylaşıyor.
- *
- * Koyu ve aydınlık sürümlerin ikisi de basılıp biri CSS ile gizleniyor —
- * JavaScript'le seçmek ilk karede yanlış logoyu gösteriyordu.
+ * Kılıç tabanın ALTINA çiziliyor: aşağı indiğinde üst parçası kolun
+ * arkasında kayboluyor, alt parçası altından çıkıyor.
  */
 export function DivisionLogo({
   slug,
   className = "",
-  priority = false,
 }: {
   slug: string;
   className?: string;
-  priority?: boolean;
 }) {
-  const maskId = useId();
+  const id = useId();
   const logo = divisionLogos[slug];
   if (!logo) return null;
+
+  const baseMaskId = `${id}-base`;
+  const partMaskId = `${id}-part`;
+  const { part } = logo;
+
+  /* Koyu ve aydınlık sürümlerin ikisi de basılıp biri CSS ile gizleniyor —
+     temayı JavaScript'le seçmek ilk karede yanlış logoyu gösteriyordu. */
+  const inks = (maskId: string) => (
+    <>
+      <image
+        className="logo-ink-dark"
+        href={logo.dark.src}
+        width={logo.w}
+        height={logo.h}
+        mask={`url(#${maskId})`}
+      />
+      <image
+        className="logo-ink-light"
+        href={logo.light.src}
+        width={logo.w}
+        height={logo.h}
+        mask={`url(#${maskId})`}
+      />
+    </>
+  );
+
+  const partLayer = part && (
+    <g
+      className={part.kind === "sword" ? "logo-sword" : "logo-gear"}
+      style={
+        part.origin
+          ? { transformOrigin: `${part.origin[0]}px ${part.origin[1]}px` }
+          : undefined
+      }
+    >
+      {inks(partMaskId)}
+    </g>
+  );
 
   return (
     <svg
@@ -41,7 +78,7 @@ export function DivisionLogo({
     >
       <defs>
         <mask
-          id={maskId}
+          id={baseMaskId}
           maskUnits="userSpaceOnUse"
           x="0"
           y="0"
@@ -60,22 +97,23 @@ export function DivisionLogo({
             strokeLinejoin="round"
           />
         </mask>
+        {part && (
+          <mask
+            id={partMaskId}
+            maskUnits="userSpaceOnUse"
+            x="0"
+            y="0"
+            width={logo.w}
+            height={logo.h}
+          >
+            <image href={part.mask.src} width={logo.w} height={logo.h} />
+          </mask>
+        )}
       </defs>
-      <image
-        className="logo-ink-dark"
-        href={logo.dark.src}
-        width={logo.w}
-        height={logo.h}
-        mask={`url(#${maskId})`}
-        {...(priority ? { fetchPriority: "high" as const } : {})}
-      />
-      <image
-        className="logo-ink-light"
-        href={logo.light.src}
-        width={logo.w}
-        height={logo.h}
-        mask={`url(#${maskId})`}
-      />
+
+      {part?.behind && partLayer}
+      {inks(baseMaskId)}
+      {part && !part.behind && partLayer}
     </svg>
   );
 }

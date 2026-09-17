@@ -151,6 +151,9 @@ body {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
+    /* Süreyi sıfırlamak sonsuz döngüleri durdurmuyor, hızlandırıyor:
+       dönen çark bu kural altında titremeye dönüşüyordu. */
+    animation-iteration-count: 1 !important;
   }
 }
 
@@ -193,4 +196,47 @@ body {
    kaydırma çubuğu çıkarmaktan iyidir. */
 .label {
   overflow-wrap: anywhere;
+}
+
+/* Bölüm logolarındaki parça hareketleri.
+
+   `transform-box: view-box` olmadan SVG'de transform-origin ve uzunluklar
+   parçanın kendi sınır kutusuna göre çözülüyor; view-box ile logonun kendi
+   koordinat sistemine oturuyorlar — yani aşağıdaki piksel değerleri
+   logonun ölçeğinde, ekrandaki boyutundan bağımsız. */
+@keyframes sword-thrust {
+  0% {
+    transform: translateY(-150px);
+    opacity: 0;
+    animation-timing-function: ease-in;
+  }
+  14% {
+    opacity: 1;
+  }
+  55% {
+    transform: translateY(0);
+    animation-timing-function: ease-out;
+  }
+  /* Saplanma anındaki geri tepme. */
+  70% {
+    transform: translateY(-18px);
+    animation-timing-function: ease-in;
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+.logo-sword {
+  transform-box: view-box;
+  animation: sword-thrust 1.5s 0.45s both;
+}
+
+@keyframes gear-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.logo-gear {
+  transform-box: view-box;
+  animation: gear-spin 9s linear infinite;
 }

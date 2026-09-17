@@ -133,12 +133,12 @@ export const divisionsEn: Division[] = [
       },
       {
         name: "Today's Word",
-        /* ⚠️ Geçici: ad ve etiketten çıkarılmış, doğrulanmamış metin. */
+        /* ⚠️ Metin geçici; görsel oyunun kendi ikonu. */
         tagline: "The word of the day.",
         description:
           "A word puzzle game. Still in design; the rules and screenshots "
           + "will be added once it is ready to show.",
-        image: "/apps/todays-word.png",
+        image: "/apps/todays-word.jpg",
         status: "gelistirme",
         tags: ["Word game"],
       },

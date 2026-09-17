@@ -216,12 +216,12 @@ export const divisions: Division[] = [
       },
       {
         name: "Today's Word",
-        /* ⚠️ Geçici: ad ve etiketten çıkarılmış, doğrulanmamış metin. */
+        /* ⚠️ Metin geçici; görsel oyunun kendi ikonu. */
         tagline: "Günün kelimesi.",
         description:
           "Kelime bulmaca oyunu. Tasarımı sürüyor; kurallar ve ekran "
           + "görüntüleri yayına hazır olduğunda eklenecek.",
-        image: "/apps/todays-word.png",
+        image: "/apps/todays-word.jpg",
         status: "gelistirme",
         tags: ["Kelime oyunu"],
       },

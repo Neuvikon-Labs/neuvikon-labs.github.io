@@ -2,6 +2,8 @@ import Link from "next/link";
 import { getContent, termLang, type Division } from "@/lib/content";
 import { divisionHref, href, isPending, type Locale, ui } from "@/lib/i18n";
 import { Scene } from "@/components/Scene";
+import { DivisionLogo } from "@/components/DivisionLogo";
+import { divisionLogos } from "@/lib/division-logos";
 
 /**
  * Bölüm sayfası. Üç bölümün üçü ve iki dilin ikisi de bu tek bileşenden
@@ -28,12 +30,24 @@ export function DivisionView({ locale, d }: { locale: Locale; d: Division }) {
           <p className="label text-accent" lang="en">
             {d.short}
           </p>
-          <h1
-            className="display mt-4 max-w-[14ch] text-[clamp(2.6rem,8vw,5.5rem)]"
-            lang="en"
-          >
-            {d.name}
-          </h1>
+          {/* Logosu olan bölümde başlık logonun kendisi; olmayanda yazı.
+              İkisini birden basmak adı iki kez göstermek olurdu. */}
+          {divisionLogos[d.slug] ? (
+            <h1 className="mt-6">
+              <DivisionLogo
+                slug={d.slug}
+                priority
+                className="h-auto w-[min(88vw,32rem)]"
+              />
+            </h1>
+          ) : (
+            <h1
+              className="display mt-4 max-w-[14ch] text-[clamp(2.6rem,8vw,5.5rem)]"
+              lang="en"
+            >
+              {d.name}
+            </h1>
+          )}
           <p className="mt-6 max-w-[52ch] text-[15px] leading-relaxed text-dim">
             {d.intro}
           </p>

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 /**
  * Tam ekran bölüm — sitenin tek yapı taşı.
@@ -23,6 +24,10 @@ export function Scene({
   mode = "cover",
   first = false,
   eyebrowLang,
+  /** Başlık bir yere gidiyorsa adresi. Tam ekran bir projede insanın ilk
+   *  tıkladığı yer ikon ya da başlık oluyor; altındaki düğmeyi beklemek
+   *  yerine ikisi de aynı sayfaya gitsin. */
+  titleHref,
 }: {
   image?: string;
   eyebrow?: string;
@@ -35,6 +40,7 @@ export function Scene({
   children?: React.ReactNode;
   mode?: "cover" | "object";
   first?: boolean;
+  titleHref?: string;
 }) {
   return (
     <section className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden sm:justify-end">
@@ -102,7 +108,13 @@ export function Scene({
           className="display mt-4 max-w-[16ch] text-[clamp(2.4rem,7vw,5rem)]"
           lang="en"
         >
-          {title}
+          {titleHref ? (
+            <Link href={titleHref} className="transition-colors hover:text-accent">
+              {title}
+            </Link>
+          ) : (
+            title
+          )}
         </h2>
         {lead && (
           <p className="mt-5 max-w-[46ch] text-[15px] leading-relaxed text-dim">

@@ -84,6 +84,11 @@ export const ui = {
       "Bu bölümde yayına hazır bir proje henüz yok. Yukarıdaki alanlarda " +
       "birlikte bir şey yapmak istersen yazabilirsin.",
     getInTouch: "İletişime geç",
+    media: "Uygulama içinden",
+    mediaPending:
+      "Bu projenin uygulama içi görselleri ve videoları henüz eklenmedi.",
+    projectLinks: "Bağlantılar",
+    backToDivision: (name: string) => `${name} bölümüne dön`,
     contactTitle: "Birlikte bir şey yapalım",
     contactLead: "Proje fikri, iş birliği ya da sadece merak — hepsi için yazabilirsiniz.",
     notFoundTitle: "Sayfa yok",
@@ -113,6 +118,11 @@ export const ui = {
       "Nothing is ready to ship in this division yet. If you want to build " +
       "something in the areas above, write to us.",
     getInTouch: "Get in touch",
+    media: "Inside the app",
+    mediaPending:
+      "Screenshots and videos from inside this project are not up yet.",
+    projectLinks: "Links",
+    backToDivision: (name: string) => `Back to ${name}`,
     contactTitle: "Let's build something",
     contactLead:
       "A project idea, a collaboration or plain curiosity — all of it is welcome.",

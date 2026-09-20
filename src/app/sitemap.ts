@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { getContent, SITE_URL } from "@/lib/content";
+import { getContent, projectSlug, SITE_URL } from "@/lib/content";
 import { locales, routes, type RouteKey } from "@/lib/i18n";
 
 /**
@@ -48,6 +48,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
           },
         },
       });
+    }
+  }
+
+  /* Her projenin kendi sayfası da haritada: bölüm sayfasından bağlanıyorlar
+     ama arama motoruna ayrıca söylemek, yeni eklenen bir projenin fark
+     edilmesini hızlandırıyor. */
+  for (const d of getContent("tr").divisions) {
+    for (const project of d.projects) {
+      const path = `/${d.slug}/${projectSlug(project.name)}`;
+      for (const locale of locales) {
+        entries.push({
+          url: locale === "en" ? `${SITE_URL}/en${path}` : `${SITE_URL}${path}`,
+          changeFrequency: "monthly",
+          priority: 0.6,
+          alternates: {
+            languages: { tr: `${SITE_URL}${path}`, en: `${SITE_URL}/en${path}` },
+          },
+        });
+      }
     }
   }
 

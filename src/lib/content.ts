@@ -46,6 +46,24 @@ export type Project = {
    * eziyor — metni henüz yazılmamış ama öne çıkması istenen projeler için.
    */
   featured?: boolean;
+  /**
+   * Projenin kendi sayfasındaki uygulama içi görseller ve videolar.
+   *
+   * Şimdilik projelerin çoğunda boş — sayfa yine de açılıyor ve "görseller
+   * eklenecek" diyor. Ekran görüntüsü çekildiğinde tek yapılacak şey buraya
+   * bir satır eklemek; sayfa kendiliğinden doluyor.
+   */
+  media?: ProjectMedia[];
+};
+
+/** Proje sayfasındaki tek bir görsel ya da video. `public/` altındaki yol. */
+export type ProjectMedia = {
+  src: string;
+  /** Video için poster görseli; yoksa video posterisiz oynatılıyor. */
+  poster?: string;
+  /** Ekran okuyucu için kısa açıklama. */
+  alt?: string;
+  kind?: "image" | "video";
 };
 
 /** Etiketler marka adı olduğu için iki dilde de aynı yazılıyor. */
@@ -379,6 +397,46 @@ export function getContent(locale: Locale): Content {
 
 export function getDivision(locale: Locale, slug: string): Division | undefined {
   return getContent(locale).divisions.find((d) => d.slug === slug);
+}
+
+/**
+ * Proje adından adres parçası üretir: "Timber Supply & Co" → "timber-supply-co".
+ *
+ * Kayıtlara elle bir `slug` alanı eklemedim: proje adları iki dilde de aynı
+ * (hepsi marka adı), dolayısıyla addan üretilen slug iki dilde de aynı çıkıyor
+ * ve iki dosyada birden güncel tutulacak bir alan daha olmuyor.
+ */
+export function projectSlug(name: string): string {
+  return name
+    .toLowerCase()
+    .replace(/[ıİ]/g, "i")
+    .replace(/ğ/g, "g")
+    .replace(/ü/g, "u")
+    .replace(/ş/g, "s")
+    .replace(/ö/g, "o")
+    .replace(/ç/g, "c")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+/** Bir projenin o dildeki adresi — /games/pushbump, /en/games/pushbump. */
+export function projectHref(
+  locale: Locale,
+  division: string,
+  name: string,
+): string {
+  const path = `/${division}/${projectSlug(name)}`;
+  return locale === "en" ? `/en${path}` : path;
+}
+
+export function getProject(
+  locale: Locale,
+  division: string,
+  slug: string,
+): { division: Division; project: Project } | undefined {
+  const d = getDivision(locale, division);
+  const project = d?.projects.find((p) => projectSlug(p.name) === slug);
+  return d && project ? { division: d, project } : undefined;
 }
 
 /**

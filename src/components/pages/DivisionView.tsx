@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getContent, termLang, type Division } from "@/lib/content";
+import { getContent, projectHref, termLang, type Division } from "@/lib/content";
 import { divisionHref, href, isPending, type Locale, ui } from "@/lib/i18n";
 import { Scene } from "@/components/Scene";
 import { DivisionLogo } from "@/components/DivisionLogo";
@@ -75,6 +75,7 @@ export function DivisionView({ locale, d }: { locale: Locale; d: Division }) {
           mode="object"
           eyebrow={statusLabel[p.status]}
           title={p.name}
+          titleHref={projectHref(locale, d.slug, p.name)}
           lead={isPending(p.tagline) ? undefined : p.tagline}
         >
           {/* `featured` ile öne alınmış ama metni henüz yazılmamış projeler
@@ -116,6 +117,16 @@ export function DivisionView({ locale, d }: { locale: Locale; d: Division }) {
               ))}
             </ul>
           )}
+          {/* Projenin kendi sayfası: uygulama içi görseller ve videolar
+              orada duruyor. Dış bağlantılar mağazaya gidiyor, bu ise
+              sitenin içinde kalıyor — o yüzden düğme, altı çizili bağlantı
+              değil. */}
+          <Link
+            href={projectHref(locale, d.slug, p.name)}
+            className="ghost-btn is-accent"
+          >
+            {t.explore}
+          </Link>
         </Scene>
       ))}
 
@@ -134,7 +145,12 @@ export function DivisionView({ locale, d }: { locale: Locale; d: Division }) {
                       className="display text-[clamp(1.2rem,2.4vw,1.6rem)]"
                       lang="en"
                     >
-                      {p.name}
+                      <Link
+                        href={projectHref(locale, d.slug, p.name)}
+                        className="transition-colors hover:text-accent"
+                      >
+                        {p.name}
+                      </Link>
                     </h2>
                     <span className="label text-accent">
                       {statusLabel[p.status]}
